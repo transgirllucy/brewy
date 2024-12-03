@@ -5,6 +5,7 @@ import { searchPackage } from './features/search'; // Ensure this import is corr
 import { handleUpdate } from './features/update';
 import { handleUpgrade } from './features/upgrade';
 import { handleUninstall } from './features/uninstall';
+import { handleConfig } from './features/config';
 const program = new Command();
 
 program
@@ -84,6 +85,13 @@ program.command('uninstall <package>')
     .option('--cask', 'Treat the argument as a cask')
     .action((packageName: string, options: { force?: boolean; zap?: boolean; ignoreDependencies?: boolean; quiet?: boolean; verbose?: boolean; cask?: boolean }) => {
         handleUninstall(packageName, options);
+    });
+
+    program.command('config')
+    .description('Show or modify Homebrew configuration')
+    .option('--quiet', 'Suppress output messages')
+    .action((options: { quiet?: boolean }) => {
+        handleConfig(options);
     });
 
 
