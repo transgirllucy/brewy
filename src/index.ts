@@ -6,6 +6,7 @@ import { handleUpdate } from './features/update';
 import { handleUpgrade } from './features/upgrade';
 import { handleUninstall } from './features/uninstall';
 import { handleConfig } from './features/config';
+import { handleCreate } from './features/create';
 const program = new Command();
 
 program
@@ -92,6 +93,45 @@ program.command('uninstall <package>')
     .option('--quiet', 'Suppress output messages')
     .action((options: { quiet?: boolean }) => {
         handleConfig(options);
+    });
+
+    program.command('create <url>')
+    .description('Generate a formula or cask for the downloadable file at URL')
+    .option('--autotools', 'Create a basic template for an Autotools-style build')
+    .option('--cask', 'Create a basic template for a cask')
+    .option('--cmake', 'Create a basic template for a CMake-style build')
+    .option('--crystal', 'Create a basic template for a Crystal build')
+    .option('--go', 'Create a basic template for a Go build')
+    .option('--meson', 'Create a basic template for a Meson-style build')
+    .option('--node', 'Create a basic template for a Node build')
+    .option('--perl', 'Create a basic template for a Perl build')
+    .option('--python', 'Create a basic template for a Python build')
+    .option('--ruby', 'Create a basic template for a Ruby build')
+    .option('--rust', 'Create a basic template for a Rust build')
+    .option('--no-fetch', 'Do not download the URL to the cache')
+    .option('--HEAD', 'Indicate that URL points to the package\'s repository rather than a file')
+    .option('--set-name <name>', 'Explicitly set the name of the new formula or cask')
+    .option('--set-version <version>', 'Explicitly set the version of the new formula or cask')
+    .option('--set-license <license>', 'Explicitly set the license of the new formula')
+    .option('--tap <user/repo>', 'Generate the new formula within the given tap')
+    .option('-f, --force', 'Ignore errors for disallowed formula names')
+    .option('-d, --debug', 'Display any debugging information')
+    .option('-q, --quiet', 'Make some output more quiet')
+    .option('-v, --verbose', 'Make some output more verbose')
+    .action((url, options) => {
+        handleCreate(url, options);
+    });
+    program.command('edit [formula|cask|tap...]')
+    .description('Open a formula, cask, or tap in the editor')
+    .option('--formula', 'Treat all named arguments as formulae')
+    .option('--cask', 'Treat all named arguments as casks')
+    .option('--print-path', 'Print the file path to be edited, without opening an editor')
+    .option('-d, --debug', 'Display any debugging information')
+    .option('-q, --quiet', 'Make some output more quiet')
+    .option('-v, --verbose', 'Make some output more verbose')
+    .option('-h, --help', 'Show help information for the command')
+    .action((args, options) => {
+        handleEdit(args, options);
     });
 
 
