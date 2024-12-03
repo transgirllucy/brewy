@@ -3,7 +3,18 @@
   "module": "src/index.ts",
   "type": "module",
   "scripts": {
-    "start": "bun src/index.ts"
+    "start": "bun src/index.ts",
+    "compile": "bun build src/main.ts --compile --outfile brewy",
+    "build:linux": "bun build --compile --target=bun-linux-x64 ./src/index.ts --outfile=brewy-linux",
+    "build:linux-baseline": "bun build --compile --target=bun-linux-x64-baseline ./src/index.ts --outfile=brewy-linux-baseline",
+    "build:linux-modern": "bun build --compile --target=bun-linux-x64-modern ./src/index.ts --outfile=brewy-linux-modern",
+    "build:arm64": "bun build --compile --target=bun-linux-arm64 ./src/index.ts --outfile=brewy-arm64",
+    "build:windows": "bun build --compile --target=bun-windows-x64 ./src/index.ts --outfile=brewy-windows",
+    "build:windows-baseline": "bun build --compile --target=bun-windows-x64-baseline ./src/index.ts --outfile=brewy-windows-baseline",
+    "build:windows-modern": "bun build --compile --target=bun-windows-x64-modern ./src/index.ts --outfile=brewy-windows-modern",
+    "build:darwin-arm64": "bun build --compile --target=bun-darwin-arm64 ./src/index.ts --outfile=brewy-darwin-arm64",
+    "build:darwin-x64": "bun build --compile --target=bun-darwin-x64 ./src/index.ts --outfile=brewy-darwin-x64",
+    "build": "npm run build:linux && npm run build:windows && npm run build:darwin-x64 && npm run build:darwin-arm64"
   },
   "devDependencies": {
     "@types/bun": "latest",
