@@ -7,6 +7,7 @@ import { handleUpgrade } from './features/upgrade';
 import { handleUninstall } from './features/uninstall';
 import { handleConfig } from './features/config';
 import { handleCreate } from './features/create';
+import { handleEdit } from './features/edit';
 const program = new Command();
 
 program

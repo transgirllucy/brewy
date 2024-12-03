@@ -25,7 +25,7 @@ export async function handleUninstall(packageName: string, options: { force?: bo
         command += ` ${packageName}`;
         
         // Execute the command without logging the output
-        await runCommand(command, { silent: true }); // Assuming runCommand accepts an options object
+        await runCommand(command); // Assuming runCommand accepts an options object
 
         // Your own message
         if (!options.quiet) {
