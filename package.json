@@ -27,6 +27,7 @@
   },
   "dependencies": {
     "commander": "^12.1.0",
-    "consola": "^3.2.3"
+    "consola": "^3.2.3",
+    "ora": "^8.1.1"
   }
 }
