@@ -8,8 +8,7 @@ export function runCommand(command: string, options?: { cwd?: string }): Promise
         consola.error(`❌ Error executing command: "${command}"\n${stderr}`);
         reject(`Error: ${stderr}`);
       } else {
-        consola.success(`✅ Command executed successfully: "${command}"`);
-        // Convert stdout to string and trim it
+        // consola.success(`✅ Command executed successfully: "${command}"`);
         resolve(stdout.toString().trim());
       }
     });

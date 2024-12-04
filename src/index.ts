@@ -9,6 +9,7 @@ import { handleConfig } from './features/config';
 import { handleCreate } from './features/create';
 import { handleEdit } from './features/edit';
 import { handleVersion } from './features/version';
+import { handleServices } from './features/services';
 const program = new Command();
 
 program
@@ -139,6 +140,22 @@ program.command('uninstall <package>')
     .description("shows the version")
     .action(() => {
         handleVersion();
+    });
+
+    program
+    .command('services <subcommand> [formula]')
+    .description('Manage background services with Homebrew')
+    .option('-a, --all', 'Run subcommand on all services')
+    .option('--json', 'Output as JSON')
+    .option('-d, --debug', 'Display any debugging information')
+    .option('-q, --quiet', 'Make some output more quiet')
+    .option('-v, --verbose', 'Make some output more verbose')
+    .option('--file <file>', 'Use the service file from this location to start the service')
+    .option('--sudo-service-user <user>', 'When run as root on macOS, run the service(s) as this user')
+    .option('--max-wait <seconds>', 'Wait at most this many seconds for stop to finish stopping a service')
+    .option('--no-wait', 'Don\'t wait for stop to finish stopping the service')
+    .action(async (subcommand, formula, options) => {
+        await handleServices(subcommand, formula, options);
     });
 
 

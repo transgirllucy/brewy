@@ -1,3 +1,4 @@
+import ora from "ora";
 import { runCommand } from "../command";
 import { consola } from "consola";
 
@@ -38,9 +39,14 @@ export async function searchPackage({ term, options }: { term: string; options: 
             command += ' --quiet';
         }
 
+        const spinner = ora('🔍 Searching...').start();
         const result = await runCommand(command);
         if (!options.quiet) {
-            consola.info(`📦 Search results for "${term}":\n${result}`);
+            const formattedResults = result.split('\n').map(line => line.trim()).filter(line => line);
+            console.log("\n");
+            formattedResults.forEach(line => {
+                consola.info(`📦 ${line}`);
+            });
         }
     } catch (error: any) {
         consola.error(`❌ Error searching for package "${term}": ${error.message}`);
