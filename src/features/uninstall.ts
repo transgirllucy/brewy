@@ -1,8 +1,22 @@
 import { consola } from "consola";
 import { runCommand } from "../command";
 
-export async function handleUninstall(packageName: string, options: { force?: boolean; zap?: boolean; ignoreDependencies?: boolean; quiet?: boolean; verbose?: boolean; cask?: boolean }) {
+interface UninstallOptions {
+    force?: boolean;
+    zap?: boolean;
+    ignoreDependencies?: boolean;
+    quiet?: boolean;
+    verbose?: boolean;
+    cask?: boolean;
+}
+
+export async function handleUninstall(packageName: string, options: UninstallOptions) {
     try {
+        if (!packageName) {
+            consola.warn('❌ Please provide a package name to uninstall.');
+            return;
+        }
+
         let command = 'brew uninstall';
         if (options.force) {
             command += ' --force';
@@ -24,17 +38,17 @@ export async function handleUninstall(packageName: string, options: { force?: bo
         }
         command += ` ${packageName}`;
         
-        // Execute the command without logging the output
+        // Execute the command
         await runCommand(command); // Assuming runCommand accepts an options object
 
-        // Your own message
+        // Log success message
         if (!options.quiet) {
             consola.info(`🗑️ Successfully uninstalled "${packageName}".`);
         }
-    } catch (error) {
-        // Optionally log the error if you want to handle it
+    } catch (error: any) {
+        // Log the error if not in quiet mode
         if (!options.quiet) {
-            consola.error(`Error during uninstallation of "${packageName}": ${error.message}`);
+            consola.error(`❌ Error during uninstallation of "${packageName}": ${error.message}`);
         }
     }
 }
