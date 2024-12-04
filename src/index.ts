@@ -8,6 +8,7 @@ import { handleUninstall } from './features/uninstall';
 import { handleConfig } from './features/config';
 import { handleCreate } from './features/create';
 import { handleEdit } from './features/edit';
+import { handleVersion } from './features/version';
 const program = new Command();
 
 program
@@ -133,6 +134,11 @@ program.command('uninstall <package>')
     .option('-h, --help', 'Show help information for the command')
     .action((args, options) => {
         handleEdit(args, options);
+    });
+    program.command('version')
+    .description("shows the version")
+    .action(() => {
+        handleVersion();
     });
 
 

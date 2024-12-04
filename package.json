@@ -14,7 +14,8 @@
     "build:windows-modern": "bun build --compile --target=bun-windows-x64-modern ./src/index.ts --outfile=./dist/brewy-windows-modern",
     "build:darwin-arm64": "bun build --compile --target=bun-darwin-arm64 ./src/index.ts --outfile=./dist/brewy-darwin-arm64",
     "build:darwin-x64": "bun build --compile --target=bun-darwin-x64 ./src/index.ts --outfile=./dist/brewy-darwin-x64",
-    "build": "npm run build:linux && npm run build:windows && npm run build:darwin-x64 && npm run build:darwin-arm64"
+    "build": "npm run build:linux && npm run build:windows && npm run build:darwin-x64 && npm run build:darwin-arm64",
+    "homebrew": "bun run build && tar -czvf binaries.tar.gz ./dist/"
   },
   "devDependencies": {
     "@types/bun": "latest",
