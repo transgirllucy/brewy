@@ -18,6 +18,5 @@
     defaultPackage.x86_64-linux = brewy;
     defaultPackage.aarch64-linux = brewy;
     defaultPackage.darwin = brewy;
-    defaultPackage = brewy;
   };
 }
