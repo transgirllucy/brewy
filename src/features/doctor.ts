@@ -41,17 +41,17 @@ export const handleDoctor = async (options: {
         // Handle output based on the options
         if (!options.quiet) {
             if (stdout) {
-                consola.log(stdout);
+                consola.log(`🩺 ${stdout}`); // Using a stethoscope emoji to indicate health check
             }
             if (stderr) {
-                consola.error(stderr);
+                consola.error(`⚠️ ${stderr}`); // Warning emoji for errors
             }
         }
     } catch (error: any) {
         // Handle errors
-        consola.error(`Error executing brew doctor: ${error.message}`);
+        consola.error(`❌ Error executing brew doctor: ${error.message}`);
         if (error.stderr) {
-            consola.error(error.stderr);
+            consola.error(`⚠️ ${error.stderr}`);
         }
         process.exit(1); // Exit with a non-zero status
     }

@@ -10,13 +10,14 @@ export async function handleConfig(options: { quiet?: boolean; verbose?: boolean
         if (options.verbose) {
             command += ' --verbose';
         }
+
         const result = await runCommand(command);
         if (!options.quiet) {
             consola.info(`🔧 Homebrew Configuration:\n${result}`);
         }
-    } catch (error) {
+    } catch (error: any) {
         if (!options.quiet) {
-            consola.error(`Error retrieving Homebrew configuration: ${error}`);
+            consola.error(`❌ Error retrieving Homebrew configuration: ${error.message}`);
         }
     }
 }

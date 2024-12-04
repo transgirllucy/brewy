@@ -37,17 +37,17 @@ export const handleEdit = async (args: string[], options: {
         // Handle output based on the options
         if (!options.quiet) {
             if (stdout) {
-                consola.log(stdout);
+                consola.log(`✏️ ${stdout}`); // Using a pencil emoji to indicate editing
             }
             if (stderr) {
-                consola.error(stderr);
+                consola.error(`⚠️ ${stderr}`); // Warning emoji for errors
             }
         }
     } catch (error: any) {
         // Handle errors
-        consola.error(`Error executing brew edit: ${error.message}`);
+        consola.error(`❌ Error executing brew edit: ${error.message}`);
         if (error.stderr) {
-            consola.error(error.stderr);
+            consola.error(`⚠️ ${error.stderr}`);
         }
         process.exit(1); // Exit with a non-zero status
     }

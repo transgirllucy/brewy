@@ -59,17 +59,17 @@ export const handleCreate = async (url: string, options: {
         // Handle output based on the options
         if (!options.quiet) {
             if (stdout) {
-                consola.log(stdout);
+                consola.log(`📦 ${stdout}`);
             }
             if (stderr) {
-                consola.error(stderr);
+                consola.error(`⚠️ ${stderr}`);
             }
         }
     } catch (error: any) {
         // Handle errors
-        consola.error(`Error executing brew create: ${error.message}`);
+        consola.error(`❌ Error executing brew create: ${error.message}`);
         if (error.stderr) {
-            consola.error(error.stderr);
+            consola.error(`⚠️ ${error.stderr}`);
         }
         process.exit(1); // Exit with a non-zero status
     }
