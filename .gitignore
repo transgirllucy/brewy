@@ -179,3 +179,45 @@ brewy-darwin-arm64
 brewy-darwin-x64
 brewy-linux
 brewy-windows.exe
+
+# Node.js dependencies
+node_modules/
+
+# Build output
+dist/
+.bun-build*
+
+# Binaries
+brewy
+brewy-darwin-arm64
+brewy-darwin-x64
+brewy-linux
+brewy-windows.exe
+
+# Lock files
+bun.lockb
+
+# Logs
+*.log
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# Temporary files
+*.tmp
+*.temp
+
+# Archive files
+*.tar.gz
+
+# IDE specific files
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# Environment variables
+.env
+
+.*.bun-build
