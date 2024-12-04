@@ -1,9 +1,21 @@
 import consola from 'consola'; // Ensure this import is correct
 import { runCommand } from '../command'; 
 
+interface UpgradeOptions {
+    quiet?: boolean;
+    force?: boolean;
+    verbose?: boolean;
+    dryRun?: boolean;
+    cask?: boolean;
+}
 
-export async function handleUpgrade(packageNames: string[], options: { quiet?: boolean; force?: boolean; verbose?: boolean; dryRun?: boolean; cask?: boolean; }) {
+export async function handleUpgrade(packageNames: string[], options: UpgradeOptions) {
     try {
+        if (packageNames.length === 0) {
+            consola.warn('❌ Please provide at least one package name to upgrade.');
+            return;
+        }
+
         let command = 'brew upgrade';
         if (options.force) {
             command += ' --force';
@@ -21,15 +33,13 @@ export async function handleUpgrade(packageNames: string[], options: { quiet?: b
             command += ' --cask';
         }
 
-        if (packageNames.length) {
-            command += ` ${packageNames.join(' ')}`;
-        }
+        command += ` ${packageNames.join(' ')}`;
 
         const result = await runCommand(command);
         if (!options.quiet) {
             consola.info(`🔄 Upgrade completed:\n${result}`);
         }
     } catch (error: any) {
-        consola.error(`Error during upgrade: ${error.message}`);
+        consola.error(`❌ Error during upgrade: ${error.message}`);
     }
 }
