@@ -173,3 +173,9 @@ dist
 
 # Finder (MacOS) folder config
 .DS_Store
+
+brewy
+brewy-darwin-arm64
+brewy-darwin-x64
+brewy-linux
+brewy-windows.exe
