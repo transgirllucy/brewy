@@ -1,7 +1,7 @@
 import consola from 'consola'; // Ensure this import is correct
 import { runCommand } from '../command'; 
+import { version } from '../../package.json'; // Assuming version is defined in package.json
 
-
-export function handleVersion() {
-   consola.box("Brewy Version 1.0.0")
+export function handleVersion(): void {
+    consola.box(`Brewy Version ${version}`);
 }
